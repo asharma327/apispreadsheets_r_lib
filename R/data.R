@@ -1,11 +1,14 @@
 #'
+#'@param output_format
 #' @export
 
+# devtools::document()
 check_paramter_errors <- function(output_format, accessKey, secretKey){
-  if (output_format %in% c('jsonRow', 'jsonColumn', 'matrix') & !is.null(output_format)){
-    stop("Output format must be jsonRow, jsonColumn or matrix or not used. Default is jsonRow")
+  if(!is.null(output_format)){
+    if(!(output_format %in% c('jsonRow', 'jsonColumn', 'matrix'))){
+      stop("Output format must be jsonRow, jsonColumn or matrix or not used. Default is jsonRow")
+    }
   }
-
 
   if ((is.null(accessKey) & !is.null(secretKey)) | (is.null(secretKey) & !is.null(accessKey))){
     stop("Both access and secret key parameters must have values or not be used")
