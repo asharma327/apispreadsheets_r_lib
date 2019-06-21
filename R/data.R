@@ -49,7 +49,7 @@ data <- function(file_id, output_format=NULL, accessKey=NULL, secretKey=NULL){
     get_status_code <- httr::status_code(r)
 
     if (get_status_code == 200){
-      jsonResponse <- jsonlite::fromJSON(content(response, "text"))
+      jsonResponse <- jsonlite::fromJSON(httr::content(response, "text"))
       return (return_data(jsonResponse))
     }
     else if (get_status_code == 400){
@@ -70,7 +70,7 @@ data <- function(file_id, output_format=NULL, accessKey=NULL, secretKey=NULL){
     post_status_code = httr::status_code(r)
 
     if (post_status_code == 200){
-      jsonResponse <- jsonlite::fromJSON(content(response, "text"))
+      jsonResponse <- jsonlite::fromJSON(httr::content(response, "text"))
       return (return_data(jsonResponse))
     }
     else if (post_status_code == 401){
