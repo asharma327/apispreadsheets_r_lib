@@ -65,7 +65,7 @@ data <- function(file_id, output_format=NULL, accessKey=NULL, secretKey=NULL){
   }
   else{
     headers <- c('accessKey' = accessKey, 'secretKey' = secretKey)
-    r <- httr::POST(url=url, add_headers(headers), encode="json")
+    r <- httr::POST(url=url, httr::add_headers(headers), encode="json")
 
     post_status_code = httr::status_code(r)
 
