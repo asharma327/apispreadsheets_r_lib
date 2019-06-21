@@ -20,7 +20,7 @@ check_paramter_errors <- function(output_format, accessKey, secretKey){
 
 return_data <- function(output_format, jsonResponse){
   if (output_format %in% c("matrix", "jsonRow")){
-    return(jsonReponse[[1]])
+    return(jsonResponse[[1]])
   }
   else{
     return(jsonResponse)
@@ -49,8 +49,8 @@ data <- function(file_id, output_format=NULL, accessKey=NULL, secretKey=NULL){
     get_status_code <- httr::status_code(r)
 
     if (get_status_code == 200){
-      jsonResponse <- jsonlite::fromJSON(httr::content(response, "text"))
-      return (return_data(jsonResponse))
+      jsonResponse <- jsonlite::fromJSON(httr::content(r, "text"))
+      return (return_data(output, jsonResponse))
     }
     else if (get_status_code == 400){
       stop("The file is private. Please provide access and secret keys")
@@ -70,8 +70,8 @@ data <- function(file_id, output_format=NULL, accessKey=NULL, secretKey=NULL){
     post_status_code = httr::status_code(r)
 
     if (post_status_code == 200){
-      jsonResponse <- jsonlite::fromJSON(httr::content(response, "text"))
-      return (return_data(jsonResponse))
+      jsonResponse <- jsonlite::fromJSON(httr::content(r, "text"))
+      return (return_data(output,jsonResponse))
     }
     else if (post_status_code == 401){
       stop("The Access or Secret key is invalid")
